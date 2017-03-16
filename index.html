@@ -22,6 +22,7 @@
 			}
 			.output-printer table td div {
 				margin-top: 225px;
+				width: 140px;
 			}
 			.top7 { margin-top:20px; }
 			
@@ -98,7 +99,8 @@
 				}
 				
 				$('table td div').width('140px');
-				$('#message').html('Đã tạo xong ' + counter + ' mã vạch!');
+				
+				$('#message').html('Đã tạo xong ' + counter'/' + len + ' mã vạch!');
 			}
 			
 			function rotateCanvas(id) {
@@ -116,7 +118,7 @@
 			$(document).ready(function() {
 				if (location.href.indexOf('localhost') >= 0) {
 					$('#imeiList').val('356938035643809;356938035643777;356938645763777;356938451064564;356938035345673;356938345363412;356938665363412;356938035643809;356938035643777;356938645763777;356938451064564;356938035345673;356938345363412;356938665363412;');
-					generate();
+					// generate();
 				}
 			});
 		</script>
