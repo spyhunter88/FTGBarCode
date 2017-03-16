@@ -17,17 +17,19 @@
 				padding-top: 25px;
 			}
 			.output-printer table td {
-				height: 450px;
+				height: 420px;
 				width: 142px;
 			}
 			.output-printer table td div {
-				margin-top: 225px;
-				width: 140px;
+				margin-top: 210px;
+				width: 138px;
 			}
 			.top7 { margin-top:20px; }
 			
 			@media print {
 				.no-print { display: none !important; }
+				table { border: 0px solid !important; }
+				table td { border: 0px solid !important; }
 			}
 		</style>
 		
@@ -52,24 +54,24 @@
 			</div>
 			<div class="row top7">
 			<div class="col-md-12 output-printer">
-				<table class="table table-bordered">
+				<table class="table" >
 					<tr>
-						<td><div><canvas id="barcode1"></canvas></div></td>
-						<td><div><canvas id="barcode2"></canvas></div></td>
-						<td><div><canvas id="barcode3"></canvas></div></td>
-						<td><div><canvas id="barcode4"></canvas></div></td>
-						<td><div><canvas id="barcode5"></canvas></div></td>
-						<td><div><canvas id="barcode6"></canvas></div></td>
-						<td><div><canvas id="barcode7"></canvas></div></td>
+						<td><div><svg id="barcode1"></svg></div></td>
+						<td><div><svg id="barcode2"></svg></div></td>
+						<td><div><svg id="barcode3"></svg></div></td>
+						<td><div><svg id="barcode4"></svg></div></td>
+						<td><div><svg id="barcode5"></svg></div></td>
+						<td><div><svg id="barcode6"></svg></div></td>
+						<td><div><svg id="barcode7"></svg></div></td>
 					</tr>
 					<tr>
-						<td><div><canvas id="barcode8"></canvas></div></td>
-						<td><div><canvas id="barcode9"></canvas></div></td>
-						<td><div><canvas id="barcode10"></canvas></div></td>
-						<td><div><canvas id="barcode11"></canvas></div></td>
-						<td><div><canvas id="barcode12"></canvas></div></td>
-						<td><div><canvas id="barcode13"></canvas></div></td>
-						<td><div><canvas id="barcode14"></canvas></div></td>
+						<td><div><svg id="barcode8"></svg></div></td>
+						<td><div><svg id="barcode9"></svg></div></td>
+						<td><div><svg id="barcode10"></svg></div></td>
+						<td><div><svg id="barcode11"></svg></div></td>
+						<td><div><svg id="barcode12"></svg></div></td>
+						<td><div><svg id="barcode13"></svg></div></td>
+						<td><div><svg id="barcode14"></svg></div></td>
 					</tr>
 				<table>
 			</div>
@@ -86,19 +88,20 @@
 				for (var i = 0; i < 14; i++) {
 					var _elem = "#barcode" + (i + 1);
 					if ( i >= len || imei[i] == '') {
-						var _canvas = $(_elem)[0];
-						_canvas.width = _canvas.width;
+						var _svg = $(_elem)[0];
+						_svg.width = _svg.width;
 						continue;
 					}
 					counter++;
 					JsBarcode(_elem, imei[i], {
 						fontSize: 30,
-						height: 70,
-						marginTop: 15
+						width: 2,
+						height: 50,
+						marginTop: 20
 					});
 				}
 				
-				$('table td div').width('140px');
+				// $('table td div').width('140px');
 				
 				$('#message').html('Đã tạo xong ' + counter + '/' + len + ' mã vạch!');
 			}
@@ -118,7 +121,7 @@
 			$(document).ready(function() {
 				if (location.href.indexOf('localhost') >= 0) {
 					$('#imeiList').val('356938035643809;356938035643777;356938645763777;356938451064564;356938035345673;356938345363412;356938665363412;356938035643809;356938035643777;356938645763777;356938451064564;356938035345673;356938345363412;356938665363412;');
-					// generate();
+					generate();
 				}
 			});
 		</script>
