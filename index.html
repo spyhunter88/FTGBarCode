@@ -38,13 +38,16 @@
 	<body>
 		<div class="container">
 			<h1 class="no-print">Sinh IMEI tự động</h1>
-			<div class="col-md-12">
-				<textarea class="form-control no-print" id="imeiList" rows="5"></textarea>
+			<div class="row no-print">
+				<div class="col-md-12">
+					<textarea class="form-control" id="imeiList" rows="5"></textarea>
+				</div>
 			</div>
-			<div class="row">
-			<div class="col-md-12">
-				<button class="btn btn-lg btn-primary no-print" onclick="generate()">Generate</button>
-			</div>
+			<div class="row no-print">
+				<div class="col-md-12">
+					<button class="btn btn-lg btn-primary" onclick="generate()">Generate</button>
+					<label id="message"></label>
+				</div>
 			</div>
 			<div class="row top7">
 			<div class="col-md-12 output-printer">
@@ -73,24 +76,29 @@
 		</div>
 		
 		<script type="text/javascript">
-			
 			function generate() {
+				$('#message').html('');
 				var imeiList = $('#imeiList').val();
 				var imei = imeiList.split(';');
 				
-				var len = imei.length;
-				for (var i = 0; i < len && i < 14; i++) {
+				var len = imei.length, counter = 0;
+				for (var i = 0; i < 14; i++) {
+					counter++;
 					var _elem = "#barcode" + (i + 1);
+					if ( i >= len || imei[i] == '') {
+						var _canvas = $(_elem)[0];
+						_canvas.width = _canvas.width;
+						continue;
+					}
 					JsBarcode(_elem, imei[i], {
-						fontSize: 25
+						fontSize: 30,
+						height: 70,
+						marginTop: 15
 					});
-					// $(_elem).rotate(90);
-					// rotateCanvas(_elem);
 				}
 				
 				$('table td div').width('140px');
-				
-				// rotateCanvas();
+				$('#message').html('Đã tạo xong ' + counter + ' mã vạch!');
 			}
 			
 			function rotateCanvas(id) {
@@ -106,8 +114,10 @@
 			}
 			
 			$(document).ready(function() {
-				$('#imeiList').val('356938035643809;356938035643777;356938645763777;356938451064564;356938035345673;356938345363412;356938665363412;356938035643809;356938035643777;356938645763777;356938451064564;356938035345673;356938345363412;356938665363412;');
-				generate();
+				if (location.href.indexOf('localhost') >= 0) {
+					$('#imeiList').val('356938035643809;356938035643777;356938645763777;356938451064564;356938035345673;356938345363412;356938665363412;356938035643809;356938035643777;356938645763777;356938451064564;356938035345673;356938345363412;356938665363412;');
+					generate();
+				}
 			});
 		</script>
 	</body>
