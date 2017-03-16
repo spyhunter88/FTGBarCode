@@ -84,13 +84,13 @@
 				
 				var len = imei.length, counter = 0;
 				for (var i = 0; i < 14; i++) {
-					counter++;
 					var _elem = "#barcode" + (i + 1);
 					if ( i >= len || imei[i] == '') {
 						var _canvas = $(_elem)[0];
 						_canvas.width = _canvas.width;
 						continue;
 					}
+					counter++;
 					JsBarcode(_elem, imei[i], {
 						fontSize: 30,
 						height: 70,
