@@ -15,14 +15,21 @@
 			}
 			.output-printer table {
 				padding-top: 25px;
+				padding-left: 7px;
+				padding-right: 40px;
 			}
 			.output-printer table td {
 				height: 420px;
-				width: 142px;
+				width: 138px;
 			}
 			.output-printer table td div {
 				margin-top: 210px;
 				width: 138px;
+			}
+			.output-printer table td label {
+				white-space: nowrap;
+				margin-left: 50px;
+				font-size: medium;
 			}
 			.top7 { margin-top:20px; }
 			
@@ -48,30 +55,37 @@
 			</div>
 			<div class="row no-print">
 				<div class="col-md-12">
+					<label style="color: red">HƯỚNG DẪN: In khổ A4, Margin để None.</label>
+				</div>
+			</div>
+			<div class="row no-print">
+				<div class="col-md-12">
 					<button class="btn btn-lg btn-primary" onclick="generate()">Generate</button>
 					<label id="message"></label>
 				</div>
 			</div>
 			<div class="row top7">
-			<div class="col-md-12 output-printer">
+			<div class="col-md-12 output-printer" style="padding-left: 18px; padding-right: 30px">
 				<table class="table" >
 					<tr>
-						<td><div><svg id="barcode1"></svg></div></td>
-						<td><div><svg id="barcode2"></svg></div></td>
-						<td><div><svg id="barcode3"></svg></div></td>
-						<td><div><svg id="barcode4"></svg></div></td>
-						<td><div><svg id="barcode5"></svg></div></td>
-						<td><div><svg id="barcode6"></svg></div></td>
-						<td><div><svg id="barcode7"></svg></div></td>
+						<td><div>
+							<svg id="barcode1"></svg><label id="label1"></label>
+						</div></td>
+						<td><div><svg id="barcode2"></svg><label id="label2"></label></div></td>
+						<td><div><svg id="barcode3"></svg><label id="label3"></label></div></td>
+						<td><div><svg id="barcode4"></svg><label id="label4"></label></div></td>
+						<td><div><svg id="barcode5"></svg><label id="label5"></label></div></td>
+						<td><div><svg id="barcode6"></svg><label id="label6"></label></div></td>
+						<td><div><svg id="barcode7"></svg><label id="label7"></label></div></td>
 					</tr>
 					<tr>
-						<td><div><svg id="barcode8"></svg></div></td>
-						<td><div><svg id="barcode9"></svg></div></td>
-						<td><div><svg id="barcode10"></svg></div></td>
-						<td><div><svg id="barcode11"></svg></div></td>
-						<td><div><svg id="barcode12"></svg></div></td>
-						<td><div><svg id="barcode13"></svg></div></td>
-						<td><div><svg id="barcode14"></svg></div></td>
+						<td><div><svg id="barcode8"></svg><label id="label8"></label></div></td>
+						<td><div><svg id="barcode9"></svg><label id="label9"></label></div></td>
+						<td><div><svg id="barcode10"></svg><label id="label10"></label></div></td>
+						<td><div><svg id="barcode11"></svg><label id="label11"></label></div></td>
+						<td><div><svg id="barcode12"></svg><label id="label12"></label></div></td>
+						<td><div><svg id="barcode13"></svg><label id="label13"></label></div></td>
+						<td><div><svg id="barcode14"></svg><label id="label14"></label></div></td>
 					</tr>
 				<table>
 			</div>
@@ -93,11 +107,13 @@
 						continue;
 					}
 					counter++;
+					$('#label' + (i + 1)).html('IMEI: ' + imei[i]);
 					JsBarcode(_elem, imei[i], {
 						fontSize: 30,
 						width: 2,
 						height: 50,
-						marginTop: 20
+						marginTop: 20,
+						displayValue: false
 					});
 				}
 				
