@@ -4,15 +4,111 @@
 		<meta charset="UTF-8">
 		<title>BarCode Generator for FTG</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<style type="text/css">
+			.output-printer div {
+				margin: auto auto auto auto;				
+				-ms-transform: rotate(-90deg); /* IE 9 */
+				-webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+				transform: rotate(-90deg) translateX(-100%);
+				transform-origin: top left;
+				padding-right: -100px;
+			}
+			.output-printer table {
+				padding-top: 25px;
+			}
+			.output-printer table td {
+				height: 450px;
+				width: 142px;
+			}
+			.output-printer table td div {
+				margin-top: 225px;
+			}
+			.top7 { margin-top:20px; }
+			
+			@media print {
+				.no-print { display: none !important; }
+			}
+		</style>
 		
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="https://rawgit.com/lindell/JsBarcode/master/dist/JsBarcode.all.min.js"></script>
+		<script type="text/javascript" src="https://rawgit.com/wilq32/jqueryrotate/master/jQueryRotate.js"></script>
 	</head>
 	<body>
-		<div>
-			<img id="barcode1"/>
-			<script>JsBarcode("#barcode1", "Hello!")</script>
+		<div class="container">
+			<h1 class="no-print">Sinh IMEI tự động</h1>
+			<div class="col-md-12">
+				<textarea class="form-control no-print" id="imeiList" rows="5"></textarea>
+			</div>
+			<div class="row">
+			<div class="col-md-12">
+				<button class="btn btn-lg btn-primary no-print" onclick="generate()">Generate</button>
+			</div>
+			</div>
+			<div class="row top7">
+			<div class="col-md-12 output-printer">
+				<table class="table table-bordered">
+					<tr>
+						<td><div><canvas id="barcode1"></canvas></div></td>
+						<td><div><canvas id="barcode2"></canvas></div></td>
+						<td><div><canvas id="barcode3"></canvas></div></td>
+						<td><div><canvas id="barcode4"></canvas></div></td>
+						<td><div><canvas id="barcode5"></canvas></div></td>
+						<td><div><canvas id="barcode6"></canvas></div></td>
+						<td><div><canvas id="barcode7"></canvas></div></td>
+					</tr>
+					<tr>
+						<td><div><canvas id="barcode8"></canvas></div></td>
+						<td><div><canvas id="barcode9"></canvas></div></td>
+						<td><div><canvas id="barcode10"></canvas></div></td>
+						<td><div><canvas id="barcode11"></canvas></div></td>
+						<td><div><canvas id="barcode12"></canvas></div></td>
+						<td><div><canvas id="barcode13"></canvas></div></td>
+						<td><div><canvas id="barcode14"></canvas></div></td>
+					</tr>
+				<table>
+			</div>
+			</div>
 		</div>
+		
+		<script type="text/javascript">
+			
+			function generate() {
+				var imeiList = $('#imeiList').val();
+				var imei = imeiList.split(';');
+				
+				var len = imei.length;
+				for (var i = 0; i < len && i < 14; i++) {
+					var _elem = "#barcode" + (i + 1);
+					JsBarcode(_elem, imei[i], {
+						fontSize: 25
+					});
+					// $(_elem).rotate(90);
+					// rotateCanvas(_elem);
+				}
+				
+				$('table td div').width('140px');
+				
+				// rotateCanvas();
+			}
+			
+			function rotateCanvas(id) {
+				var rotatedBarcodeCanvas = document.getElementById(id);
+				var context = rotatedBarcodeCanvas.getContext('2D');
+				context.width = allCanvas[i].height;
+				context.height = allCanvas[i].width;
+				
+				// Rotate
+				context.translate(allCanvas[i].height, 0);
+				context.rotate(90* Math.PI/180);
+				context.drawImage(allCanvas, 0, 0);
+			}
+			
+			$(document).ready(function() {
+				$('#imeiList').val('356938035643809;356938035643777;356938645763777;356938451064564;356938035345673;356938345363412;356938665363412;356938035643809;356938035643777;356938645763777;356938451064564;356938035345673;356938345363412;356938665363412;');
+				generate();
+			});
+		</script>
 	</body>
 </html>
