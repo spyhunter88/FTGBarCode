@@ -76,18 +76,18 @@
 						<td><div><svg id="barcode2"></svg><label id="label2"></label></div></td>
 						<td><div><svg id="barcode3"></svg><label id="label3"></label></div></td>
 						<td><div><svg id="barcode4"></svg><label id="label4"></label></div></td>
+						<td><div><svg id="barcodex1"></svg><label id="labelx1"></label></div></td>
 						<td><div><svg id="barcode5"></svg><label id="label5"></label></div></td>
 						<td><div><svg id="barcode6"></svg><label id="label6"></label></div></td>
-						<td><div><svg id="barcode7"></svg><label id="label7"></label></div></td>
 					</tr>
 					<tr>
+						<td><div><svg id="barcode7"></svg><label id="label7"></label></div></td>
 						<td><div><svg id="barcode8"></svg><label id="label8"></label></div></td>
-						<td><div><svg id="barcode9"></svg><label id="label9"></label></div></td>
+						<td><div><svg id="barcode9"></svg><label id="label8"></label></div></td>
 						<td><div><svg id="barcode10"></svg><label id="label10"></label></div></td>
+						<td><div><svg id="barcodex2"></svg><label id="labelx2"></label></div></td>
 						<td><div><svg id="barcode11"></svg><label id="label11"></label></div></td>
 						<td><div><svg id="barcode12"></svg><label id="label12"></label></div></td>
-						<td><div><svg id="barcode13"></svg><label id="label13"></label></div></td>
-						<td><div><svg id="barcode14"></svg><label id="label14"></label></div></td>
 					</tr>
 				<table>
 			</div>
@@ -101,7 +101,7 @@
 				var imei = imeiList.split(';');
 				
 				var len = imei.length, counter = 0;
-				for (var i = 0; i < 14; i++) {
+				for (var i = 0; i < 12; i++) {
 					var _elem = "#barcode" + (i + 1);
 					if ( i >= len || imei[i] == '') {
 						var _svg = $(_elem)[0];
